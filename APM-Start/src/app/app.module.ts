@@ -16,11 +16,7 @@ import { ProductModule } from './products/product.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
 
-const routes: Routes = [
-  { path: 'welcome', component: WelcomeComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
-];
+
 
 @NgModule({
   imports: [
@@ -30,7 +26,7 @@ const routes: Routes = [
     ProductModule,
     UserModule,
     MessageModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
