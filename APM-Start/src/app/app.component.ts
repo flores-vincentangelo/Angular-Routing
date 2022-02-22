@@ -55,6 +55,18 @@ export class AppComponent {
       }
     }
 
+  toggleDisplayMessage(): void {
+    if(this.isMessageDisplayed){
+      this.messageService.isDisplayed = false;
+      this.router.navigate( [ { outlets: { popup: null}}]);
+    } else {
+      this.router.navigate(
+        [{outlets: {popup: ['messages']}}]
+      );
+      this.messageService.isDisplayed = true;
+    }
+  }
+
   displayMessages(): void {
     this.router.navigate(
       [{outlets: {popup: ['messages']}}]
@@ -64,6 +76,7 @@ export class AppComponent {
 
   hideMessages(): void {
     this.messageService.isDisplayed = false;
+    this.router.navigate( [ { outlets: { popup: null}}]);
   }
 
   logOut(): void {
