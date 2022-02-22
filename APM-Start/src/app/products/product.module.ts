@@ -16,32 +16,38 @@ import { ProductListResolverService } from './product-list-resolver.service';
 const routes: Routes = [
   {
     path: 'products',
-    component: ProductListComponent,
-    resolve: { resolvedData: ProductListResolverService} },
-  {
-    path: 'products/:id',
-    component: ProductDetailComponent,
-    resolve: { resolvedData: ProductResolverService }
-  },
-  {
-    path: 'products/:id/edit',
-    component: ProductEditComponent,
-    resolve: { resolvedData: ProductResolverService },
     children: [
       {
         path: '',
-        redirectTo: 'info',
-        pathMatch: 'full'
+        component: ProductListComponent,
+        resolve: { resolvedData: ProductListResolverService}
       },
       {
-        path: 'info',
-        component: ProductEditInfoComponent
+        path: ':id',
+        component: ProductDetailComponent,
+        resolve: { resolvedData: ProductResolverService }
       },
       {
-        path: 'tags',
-        component: ProductEditTagsComponent
-      }
+        path: ':id/edit',
+        component: ProductEditComponent,
+        resolve: { resolvedData: ProductResolverService },
+        children: [
+          {
+            path: '',
+            redirectTo: 'info',
+            pathMatch: 'full'
+          },
+          {
+            path: 'info',
+            component: ProductEditInfoComponent
+          },
+          {
+            path: 'tags',
+            component: ProductEditTagsComponent
+          }
 
+        ]
+      }
     ]
   }
 ];
