@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   {
     path: 'products',
-    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./products/product.module').then(m => m.ProductModule)
   },
@@ -20,6 +20,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     // enableTracing: true
+    preloadingStrategy: PreloadAllModules
   })],
   exports: [RouterModule]
 })
